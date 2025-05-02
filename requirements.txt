@@ -1,0 +1,5 @@
+crewai>=0.11.2
+requests
+beautifulsoup4
+selenium
+streamlit
