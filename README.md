@@ -1,14 +1,32 @@
-# Tweet Legal Risk Analysis
+# Tweet Legal Risk Analyzer
 
-**Step 1:** This project scaffolds the directory and dependencies.
+🛡️ **Not Legal Advice** — This Streamlit app estimates the legal risk of a tweet for a given country, using a multi-agent CrewAI workflow. It collects statutes, codes and regulations, evaluates your tweet against hate-speech, defamation, incitement, and other categories, then surfaces a risk score and detailed breakdown.
 
-**Next Steps:**
-1. Implement `collector.py` with country-specific scraping logic.
-2. Implement `aggregator.py` to parse and cite rules.
-3. Implement `evaluator.py` for NLP-based risk scoring.
-4. Implement `reporter.py` for formatting outputs.
-5. Wire up tasks in `crew.py` to execute the Crew.
-6. Build a frontend (Streamlit or FastAPI) for user input.
-7. Test end-to-end and refine heuristics.
-8. Deploy to a server or container.
+---
+
+## 🚀 Features
+
+- **Multi-Agent Architecture**  
+  - **CountryLegalDataCollector**: Scrapes official legal sources for a given country  
+  - **LegalDataAggregator**: Parses and structures statutes by category with citations  
+  - **DynamicRiskEvaluationAgent**: Scores your tweet against each legal category  
+  - **ReportGenerator**: Compiles a human-friendly summary, per-category details, and full JSON  
+
+- **Interactive Streamlit UI**  
+  - Enter your **Country** (e.g. `US`, `UK`, `Germany`)  
+  - Paste your **Tweet** text  
+  - Get an **Overall Risk** percentage, a clickable breakdown panel, and raw JSON  
+
+- **Polished UX**  
+  - Full-screen prison-bars background  
+  - Semi-transparent content container for legibility  
+  - Centered layout for any screen size  
+
+- **Deployment-Ready**  
+  - 📦 Dockerfile for containerized builds  
+  - ☁️ Streamlit Community Cloud instructions  
+
+---
+
+## 🔧 Project Structure
 
