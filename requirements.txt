@@ -3,3 +3,4 @@ requests
 beautifulsoup4
 selenium
 streamlit
+pysqlite3-binary>=0.0.1
