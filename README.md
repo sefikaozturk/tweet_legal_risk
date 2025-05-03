@@ -103,8 +103,3 @@ This tool is not legal advice. It’s a demonstration of AI-driven risk estimati
 ## 📄 License
 
 This project is released under the MIT License.
-
-Feel free to ⭐ star, fork, and send PRs!
-
-Built with CrewAI and Python.
-
