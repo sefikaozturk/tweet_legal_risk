@@ -45,7 +45,7 @@ tweet_legal_risk/
 
 Main page.
 
-<img width="1081" alt="Screenshot 2025-05-02 at 8 14 33 PM" src="https://github.com/user-attachments/assets/7a7552aa-6ed2-4e6b-9afe-7410559889fd" />
+<img width="732" alt="Screenshot 2025-05-02 at 8 17 14 PM" src="https://github.com/user-attachments/assets/31fabe4f-ef20-4c6a-9d79-a68fd3aefb0d" />
 
 The analysis structure.
 
