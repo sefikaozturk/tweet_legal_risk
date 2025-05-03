@@ -10,6 +10,27 @@ import json
 
 import base64
 
+# ──────────────────────────────────────────────────────────────────────────────
+# HACK: stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
+import sys, types
+
+# Create a fake chromadb package
+chromadb = types.ModuleType("chromadb")
+chromadb.Documents = lambda *args, **kwargs: None
+chromadb.EmbeddingFunction = lambda *args, **kwargs: None
+chromadb.Embeddings = lambda *args, **kwargs: None
+
+# Also stub submodules it looks for
+sys.modules["chromadb"]            = chromadb
+sys.modules["chromadb.api"]        = chromadb
+sys.modules["chromadb.api.types"]  = types.ModuleType("chromadb.api.types")
+# ──────────────────────────────────────────────────────────────────────────────
+
+import streamlit as st
+from collector import CountryLegalDataCollector
+# … rest of your imports …
+
+
 def add_bg_and_content_container_style(image_file: str):
     with open(image_file, "rb") as f:
         b64 = base64.b64encode(f.read()).decode()
