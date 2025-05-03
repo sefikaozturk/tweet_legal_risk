@@ -43,6 +43,14 @@ tweet_legal_risk/
 └── background.png          # Jail-bars background image
 ```
 
+Main page.
+
+<img width="1081" alt="Screenshot 2025-05-02 at 8 14 33 PM" src="https://github.com/user-attachments/assets/7a7552aa-6ed2-4e6b-9afe-7410559889fd" />
+
+The analysis structure.
+
+<img width="722" alt="Screenshot 2025-05-02 at 8 16 18 PM" src="https://github.com/user-attachments/assets/1c286d61-0a31-4f5e-bbb9-b947332f2436" />
+
 ---
 
 ## 💻 Local Setup
