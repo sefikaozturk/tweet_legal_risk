@@ -1,18 +1,3 @@
-import streamlit as st
-import crewai
-import pysqlite3 as sqlite3
-from collector import CountryLegalDataCollector
-from aggregator import LegalDataAggregator
-from evaluator import DynamicRiskEvaluationAgent
-from reporter import ReportGenerator
-from crewai import Task, Crew, Process
-import json
-
-# Apply background and ensure text stays visible on top
-
-import base64
-
-# ──────────────────────────────────────────────────────────────────────────────
 # HACK: stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
 import sys, types
 
@@ -26,8 +11,20 @@ chromadb.Embeddings = lambda *args, **kwargs: None
 sys.modules["chromadb"]            = chromadb
 sys.modules["chromadb.api"]        = chromadb
 sys.modules["chromadb.api.types"]  = types.ModuleType("chromadb.api.types")
-# ──────────────────────────────────────────────────────────────────────────────
 
+import streamlit as st
+import crewai
+import pysqlite3 as sqlite3
+from collector import CountryLegalDataCollector
+from aggregator import LegalDataAggregator
+from evaluator import DynamicRiskEvaluationAgent
+from reporter import ReportGenerator
+from crewai import Task, Crew, Process
+import json
+
+# Apply background and ensure text stays visible on top
+
+import base64
 import streamlit as st
 from collector import CountryLegalDataCollector
 # … rest of your imports …
