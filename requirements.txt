@@ -4,5 +4,4 @@ beautifulsoup4
 selenium
 streamlit
 pysqlite3-binary>=0.0.1
-chromadb<0.5.23
 rich>=13.7.0,<14.0.0
