@@ -1,23 +1,26 @@
-# Mock chromadb API to avoid import errors
+# HACK: Stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
 import sys
 import types
 
-# Create a mock chromadb module with required methods
+# Create a mock chromadb package with all the required components
 mock_chromadb = types.ModuleType("chromadb")
+mock_chromadb.Documents = lambda *args, **kwargs: None  # Mock Documents
+mock_chromadb.EmbeddingFunction = lambda *args, **kwargs: None  # Mock EmbeddingFunction
+mock_chromadb.Embeddings = lambda *args, **kwargs: None  # Mock Embeddings
+mock_chromadb.Collection = lambda *args, **kwargs: None  # Mock Collection
 mock_chromadb.api = types.ModuleType("chromadb.api")
+mock_chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Mock ClientAPI
 mock_chromadb.api.types = types.ModuleType("chromadb.api.types")
+mock_chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Mock OneOrMany
 
-# Mock the required ClientAPI and Collection
-mock_chromadb.api.ClientAPI = lambda *args, **kwargs: None
-mock_chromadb.api.types.Collection = lambda *args, **kwargs: None
-
-# Add the mock module to sys.modules
+# Add the mock module to sys.modules to ensure CrewAI uses this mock instead of the real Chroma
 sys.modules["chromadb"] = mock_chromadb
 sys.modules["chromadb.api"] = mock_chromadb.api
 sys.modules["chromadb.api.types"] = mock_chromadb.api.types
 
-# Now import CrewAI
+# Now import CrewAI after stubbing chromadb
 import crewai
+
 
 import streamlit as st
 import pysqlite3 as sqlite3
