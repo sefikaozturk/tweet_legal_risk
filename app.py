@@ -1,4 +1,5 @@
 import streamlit as st
+import crewai
 from collector import CountryLegalDataCollector
 from aggregator import LegalDataAggregator
 from evaluator import DynamicRiskEvaluationAgent
