@@ -30,16 +30,26 @@
 
 ## 🔧 Project Structure
 
-  tweet_legal_risk/
-    ├── app.py                  # Streamlit front-end & Crew kickoff
-    ├── collector.py            # CountryLegalDataCollector agent
-    ├── aggregator.py           # LegalDataAggregator agent
-    ├── evaluator.py            # DynamicRiskEvaluationAgent
-    ├── reporter.py             # ReportGenerator
-    ├── requirements.txt        # Python dependencies
-    ├── Dockerfile              # Container build instructions
-    ├── .dockerignore
-    └── background.png          # Jail-bars background image
+```text
+tweet_legal_risk/
+├── app.py                  # Streamlit front-end & Crew kickoff
+├── collector.py            # CountryLegalDataCollector agent
+├── aggregator.py           # LegalDataAggregator agent
+├── evaluator.py            # DynamicRiskEvaluationAgent
+├── reporter.py             # ReportGenerator
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Container build instructions
+├── .dockerignore
+└── background.png          # Jail-bars background image
+```
+
+Main page.
+
+<img width="732" alt="Screenshot 2025-05-02 at 8 17 14 PM" src="https://github.com/user-attachments/assets/31fabe4f-ef20-4c6a-9d79-a68fd3aefb0d" />
+
+The analysis structure.
+
+<img width="722" alt="Screenshot 2025-05-02 at 8 16 18 PM" src="https://github.com/user-attachments/assets/1c286d61-0a31-4f5e-bbb9-b947332f2436" />
 
 ---
 
