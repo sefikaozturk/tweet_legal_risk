@@ -4,15 +4,25 @@ import types
 
 # Create a mock chromadb package with all the required components
 mock_chromadb = types.ModuleType("chromadb")
-mock_chromadb.Documents = lambda *args, **kwargs: None  # Mock Documents
-mock_chromadb.EmbeddingFunction = lambda *args, **kwargs: None  # Mock EmbeddingFunction
-mock_chromadb.Embeddings = lambda *args, **kwargs: None  # Mock Embeddings
+
+# Create a mock class for Chroma components
+class MockDocuments:
+    def __init__(self, *args, **kwargs):
+        pass
+
+class MockClientAPI:
+    def __init__(self, *args, **kwargs):
+        pass
+
+class MockSettings:
+    def __init__(self, *args, **kwargs):
+        pass
+
+# Create mock classes for other Chroma components
+mock_chromadb.Documents = MockDocuments  # Mock Documents class
+mock_chromadb.EmbeddingFunction = lambda *args, **kwargs: None  # Mock EmbeddingFunction as simple lambda
+mock_chromadb.Embeddings = lambda *args, **kwargs: None  # Mock Embeddings as simple lambda
 mock_chromadb.Collection = lambda *args, **kwargs: None  # Mock Collection
-mock_chromadb.api = types.ModuleType("chromadb.api")
-mock_chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Mock ClientAPI
-mock_chromadb.api.types = types.ModuleType("chromadb.api.types")
-mock_chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Mock OneOrMany
-mock_chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: None  # Mock validate_embedding_function
 
 # Mock chromadb.errors (which is also being imported)
 mock_chromadb.errors = types.ModuleType("chromadb.errors")
@@ -20,7 +30,14 @@ mock_chromadb.errors.ChromaError = lambda *args, **kwargs: None  # Mock ChromaEr
 
 # Mock chromadb.config (the source of the current error)
 mock_chromadb.config = types.ModuleType("chromadb.config")
-mock_chromadb.config.Settings = lambda *args, **kwargs: None  # Mock Settings
+mock_chromadb.config.Settings = MockSettings  # Use MockSettings instead of None
+
+# Mock the ClientAPI and other parts of the code that might use `| None`
+mock_chromadb.api = types.ModuleType("chromadb.api")
+mock_chromadb.api.ClientAPI = MockClientAPI  # Replace with MockClientAPI class
+mock_chromadb.api.types = types.ModuleType("chromadb.api.types")
+mock_chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Mock OneOrMany
+mock_chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: None  # Mock validate_embedding_function
 
 # Add the mock module to sys.modules to ensure CrewAI uses this mock instead of the real Chroma
 sys.modules["chromadb"] = mock_chromadb
