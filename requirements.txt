@@ -5,3 +5,4 @@ selenium
 streamlit
 pysqlite3-binary>=0.0.1
 chromadb<0.5.23  
+sqlite3 >= 3.35.0
