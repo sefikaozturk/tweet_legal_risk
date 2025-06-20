@@ -8,7 +8,8 @@ chromadb.EmbeddingFunction = lambda *args, **kwargs: None
 chromadb.Embeddings = lambda *args, **kwargs: None
 chromadb.api = types.ModuleType("chromadb.api")
 chromadb.api.types = types.ModuleType("chromadb.api.types")
-chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: None  # Add this line
+chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Stub ClientAPI
+chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Add any missing types or functions
 
 # Stub submodules it looks for
 sys.modules["chromadb"] = chromadb
