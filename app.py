@@ -1,16 +1,23 @@
-# HACK: Completely prevent chromadb import by removing it from sys.modules
+# Mock chromadb API to avoid import errors
 import sys
 import types
 
-# Remove any existing reference to chromadb from sys.modules
-sys.modules["chromadb"] = None
-sys.modules["chromadb.api"] = None
-sys.modules["chromadb.api.types"] = None
+# Create a mock chromadb module with required methods
+mock_chromadb = types.ModuleType("chromadb")
+mock_chromadb.api = types.ModuleType("chromadb.api")
+mock_chromadb.api.types = types.ModuleType("chromadb.api.types")
 
-# Now, we can proceed with the CrewAI import
+# Mock the required ClientAPI and Collection
+mock_chromadb.api.ClientAPI = lambda *args, **kwargs: None
+mock_chromadb.api.types.Collection = lambda *args, **kwargs: None
+
+# Add the mock module to sys.modules
+sys.modules["chromadb"] = mock_chromadb
+sys.modules["chromadb.api"] = mock_chromadb.api
+sys.modules["chromadb.api.types"] = mock_chromadb.api.types
+
+# Now import CrewAI
 import crewai
-
-
 
 import streamlit as st
 import pysqlite3 as sqlite3
