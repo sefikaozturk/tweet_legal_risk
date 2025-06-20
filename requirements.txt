@@ -1,3 +1,4 @@
+python>=3.12.9
 beautifulsoup4==4.13.4
 chromadb==1.0.13
 crewai==0.130.0
