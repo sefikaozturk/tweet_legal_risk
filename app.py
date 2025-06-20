@@ -13,6 +13,9 @@ mock_chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Mock ClientAPI
 mock_chromadb.api.types = types.ModuleType("chromadb.api.types")
 mock_chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Mock OneOrMany
 
+# Mock validate_embedding_function (which is causing the import error)
+mock_chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: None  # Mock validate_embedding_function
+
 # Add the mock module to sys.modules to ensure CrewAI uses this mock instead of the real Chroma
 sys.modules["chromadb"] = mock_chromadb
 sys.modules["chromadb.api"] = mock_chromadb.api
