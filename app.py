@@ -18,11 +18,16 @@ mock_chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: No
 mock_chromadb.errors = types.ModuleType("chromadb.errors")
 mock_chromadb.errors.ChromaError = lambda *args, **kwargs: None  # Mock ChromaError
 
+# Mock chromadb.config (the source of the current error)
+mock_chromadb.config = types.ModuleType("chromadb.config")
+mock_chromadb.config.Settings = lambda *args, **kwargs: None  # Mock Settings
+
 # Add the mock module to sys.modules to ensure CrewAI uses this mock instead of the real Chroma
 sys.modules["chromadb"] = mock_chromadb
 sys.modules["chromadb.api"] = mock_chromadb.api
 sys.modules["chromadb.api.types"] = mock_chromadb.api.types
 sys.modules["chromadb.errors"] = mock_chromadb.errors
+sys.modules["chromadb.config"] = mock_chromadb.config
 
 # Now import CrewAI after stubbing chromadb
 import crewai
