@@ -1,4 +1,4 @@
-# HACK: stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
+# HACK: Stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
 import sys, types
 
 # Create a fake chromadb package
@@ -6,14 +6,19 @@ chromadb = types.ModuleType("chromadb")
 chromadb.Documents = lambda *args, **kwargs: None
 chromadb.EmbeddingFunction = lambda *args, **kwargs: None
 chromadb.Embeddings = lambda *args, **kwargs: None
+chromadb.api = types.ModuleType("chromadb.api")
+chromadb.api.types = types.ModuleType("chromadb.api.types")
+chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: None  # Add this line
 
-# Also stub submodules it looks for
-sys.modules["chromadb"]            = chromadb
-sys.modules["chromadb.api"]        = chromadb
-sys.modules["chromadb.api.types"]  = types.ModuleType("chromadb.api.types")
+# Stub submodules it looks for
+sys.modules["chromadb"] = chromadb
+sys.modules["chromadb.api"] = chromadb.api
+sys.modules["chromadb.api.types"] = chromadb.api.types
+
+# Now import CrewAI after stubbing chromadb
+import crewai
 
 import streamlit as st
-import crewai
 import pysqlite3 as sqlite3
 from collector import CountryLegalDataCollector
 from aggregator import LegalDataAggregator
