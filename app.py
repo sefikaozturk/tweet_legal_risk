@@ -1,4 +1,4 @@
-# HACK: Stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
+# HACK: Completely prevent chromadb import by removing it from sys.modules
 import sys
 import types
 
@@ -12,14 +12,17 @@ mock_chromadb.api = types.ModuleType("chromadb.api")
 mock_chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Mock ClientAPI
 mock_chromadb.api.types = types.ModuleType("chromadb.api.types")
 mock_chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Mock OneOrMany
-
-# Mock validate_embedding_function (which is causing the import error)
 mock_chromadb.api.types.validate_embedding_function = lambda *args, **kwargs: None  # Mock validate_embedding_function
+
+# Mock chromadb.errors (which is also being imported)
+mock_chromadb.errors = types.ModuleType("chromadb.errors")
+mock_chromadb.errors.ChromaError = lambda *args, **kwargs: None  # Mock ChromaError
 
 # Add the mock module to sys.modules to ensure CrewAI uses this mock instead of the real Chroma
 sys.modules["chromadb"] = mock_chromadb
 sys.modules["chromadb.api"] = mock_chromadb.api
 sys.modules["chromadb.api.types"] = mock_chromadb.api.types
+sys.modules["chromadb.errors"] = mock_chromadb.errors
 
 # Now import CrewAI after stubbing chromadb
 import crewai
