@@ -1,5 +1,6 @@
 import streamlit as st
 import crewai
+import pysqlite3 as sqlite3
 from collector import CountryLegalDataCollector
 from aggregator import LegalDataAggregator
 from evaluator import DynamicRiskEvaluationAgent
