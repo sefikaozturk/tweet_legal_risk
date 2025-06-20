@@ -1,11 +1,6 @@
 import streamlit as st
 import crewai
 import pysqlite3 as sqlite3
-
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
 from collector import CountryLegalDataCollector
 from aggregator import LegalDataAggregator
 from evaluator import DynamicRiskEvaluationAgent
