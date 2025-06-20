@@ -6,9 +6,12 @@ chromadb = types.ModuleType("chromadb")
 chromadb.Documents = lambda *args, **kwargs: None
 chromadb.EmbeddingFunction = lambda *args, **kwargs: None
 chromadb.Embeddings = lambda *args, **kwargs: None
+
+# Stub out the Collection and ClientAPI from chromadb
+chromadb.Collection = lambda *args, **kwargs: None  # Stub Collection
 chromadb.api = types.ModuleType("chromadb.api")
-chromadb.api.types = types.ModuleType("chromadb.api.types")
 chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Stub ClientAPI
+chromadb.api.types = types.ModuleType("chromadb.api.types")
 chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Add any missing types or functions
 
 # Stub submodules it looks for
@@ -18,6 +21,7 @@ sys.modules["chromadb.api.types"] = chromadb.api.types
 
 # Now import CrewAI after stubbing chromadb
 import crewai
+
 
 import streamlit as st
 import pysqlite3 as sqlite3
