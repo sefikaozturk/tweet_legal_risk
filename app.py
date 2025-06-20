@@ -1,26 +1,15 @@
-# HACK: Stub out chromadb so CrewAI doesn’t import the real one (and fail on sqlite)
-import sys, types
+# HACK: Completely prevent chromadb import by removing it from sys.modules
+import sys
+import types
 
-# Create a fake chromadb package
-chromadb = types.ModuleType("chromadb")
-chromadb.Documents = lambda *args, **kwargs: None
-chromadb.EmbeddingFunction = lambda *args, **kwargs: None
-chromadb.Embeddings = lambda *args, **kwargs: None
+# Remove any existing reference to chromadb from sys.modules
+sys.modules["chromadb"] = None
+sys.modules["chromadb.api"] = None
+sys.modules["chromadb.api.types"] = None
 
-# Stub out the Collection and ClientAPI from chromadb
-chromadb.Collection = lambda *args, **kwargs: None  # Stub Collection
-chromadb.api = types.ModuleType("chromadb.api")
-chromadb.api.ClientAPI = lambda *args, **kwargs: None  # Stub ClientAPI
-chromadb.api.types = types.ModuleType("chromadb.api.types")
-chromadb.api.types.OneOrMany = lambda *args, **kwargs: None  # Add any missing types or functions
-
-# Stub submodules it looks for
-sys.modules["chromadb"] = chromadb
-sys.modules["chromadb.api"] = chromadb.api
-sys.modules["chromadb.api.types"] = chromadb.api.types
-
-# Now import CrewAI after stubbing chromadb
+# Now, we can proceed with the CrewAI import
 import crewai
+
 
 
 import streamlit as st
